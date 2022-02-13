@@ -54,9 +54,17 @@ void input(data& s) {
 
 
 	for (int i = 0; i < s.n; i++) {
-		cout << "Iveskite" << i + 1 << "-aji pazymi: ";
-		cin >> s.paz[i];
-		if (s.paz[i] == 0) break;
+		int check = 0;
+		cout << "Iveskite " << i + 1 << "-aji pazymi: ";
+		do {
+			if (check > 0) {
+				cout << "Pazimys turi buti sveikas skaicius nuo 0 iki 10 imtinai ir sveikasis skaicius!" << std::endl;
+				cout << "Iveskite " << i + 1 << "-aji pazymi: ";
+			}
+			cin >> s.paz[i];
+			check++;
+		} while (s.paz[i] < 0 || s.paz[i] > 10); // Apsauga ???????????????????????????ar galima naudoti c.math???????????????????????????????????????????????
+		if (s.paz[i] == 0) break; // Atvejis kai vartotojas nori baigti irasyma
 		s.n++;
 	}
 	s.n = s.n - 2;
@@ -79,18 +87,11 @@ double mediana(data& s) {
 	double m = 0;
 	int temp = 0;
 	
-	
 	for (int i = 0; i < s.n - 1; i++) {
 		for (int j = i + 1; j < s.n; j++) {
 			if (s.paz[j] < s.paz[i]) std::swap(s.paz[j], s.paz[i]);
 		}
 	}
-
-	for (int i = 0; i < s.n; i++) {
-		cout << s.paz[i] << " ";
-	}
-	cout << std::endl;
-	
 	
 	temp = s.n;
 	if (temp % 2 != 0) {
@@ -116,7 +117,6 @@ void output(data& s) {
 	cout << std::left << std::setw(20) << s.vardas << std::left << std::setw(20) << s.pavarde;
 	if (s.m == 0) cout << std::left << std::setw(23) << std::setprecision(3) << s.v << std::endl;
 	else if (s.v == 0) cout << std::left << std::setw(20) << std::setprecision(3) << s.m << std::endl;
-	
 };
 
 void select(data& s) {
