@@ -28,15 +28,22 @@ void output(data& s);
 int main() {
 	cout << "Jeigu jusu inputas buvo nepriimtas, vadinasi neteisingai ivedete, bandykite vesti is naujo pagal reikalavimus." << std::endl;
 	srand(time(NULL)); 
-	int st = 1; // Studentu skaicius
+	int studentai;
+	cout << "Iveskite studentu skaiciu: ";
+	cin >> studentai;
+	while (cin.fail()) { // Apsauga ivedimui
+		cin.clear();
+		cin.ignore();
+		cin >> studentai;
+	}
 	
-	data* mas = new data[st];
+	data* mas = new data[studentai];
 
-	for (int i = 0; i < st; i++) {
+	for (int i = 0; i < studentai; i++) {
 		input(mas[i]);
 		select(mas[i]);
 	}
-	for (int i = 0; i < st; i++) {
+	for (int i = 0; i < studentai; i++) {
 		output(mas[i]);
 	}
 
