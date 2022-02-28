@@ -3,6 +3,8 @@
 #include <iomanip>
 #include <cmath>
 #include <time.h>
+#include <random>
+#include <chrono>
 
 using std::cout;
 using std::cin;
@@ -27,10 +29,11 @@ void output(data& s);
 
 int main() {
 	cout << "Jeigu jusu inputas buvo nepriimtas, vadinasi neteisingai ivedete, bandykite vesti is naujo pagal reikalavimus." << std::endl;
-	srand(time(NULL)); 
+	
 	int studentai;
 	cout << "Iveskite studentu skaiciu: ";
 	cin >> studentai;
+
 	while (cin.fail()) { // Apsauga ivedimui
 		cin.clear();
 		cin.ignore();
@@ -55,27 +58,23 @@ void input(data& s) {
 	cout << "Iveskite studento varda: "; cin >> s.vardas;
 	cout << "Iveskite studento pavarde: "; cin >> s.pavarde;
 
-	for (int i = 0; i < s.n; i++) {
-		char check;
-		int t = 0;
-		cout << "Jei norite ivesti " << i + 1 << "-aji pazymi iveskite 'y' arba 'n': ";
-		do {
-			cin >> check;
-		} while (check != 'y' && check != 'n');
+	using hrClock = std::chrono::high_resolution_clock;
+	std::mt19937 mt(static_cast<long unsigned int>(hrClock::now().time_since_epoch().count()));
+	std::uniform_int_distribution<int> dist(1, 10);
 
-		if (check == 'y') {
-			s.paz[i] = rand() % 10 + 1;
-			cout << "Pazimys: " <<  s.paz[i] << std::endl;
-		}
-		else if((check == 'n')) break;
-		s.n++;
+	cout << "Iveskite pazymiu kieki: "; cin >> s.n;
+	while (cin.fail()) { // Apsauga ivedimui
+		cin.ignore();
+		cin >> s.n;
 	}
-	s.n = s.n - 2;
+	for (int i = 1; i <= s.n; i++) {
+			s.paz[i] = dist(mt);
+			cout << i << "-asis pazymys: " << s.paz[i] << std::endl;
+	}
+		
 
-	cout << "Iveskite egzamino ivertinima: ";
-	s.egz = rand() % 10 + 1;
-	cout << s.egz << std::endl;
-	cout << std::endl;
+	s.egz = dist(mt);
+	cout << "Egzamino vertinimas: " << s.egz << std::endl;
 };
 
 double vidurkis(data& s) {
