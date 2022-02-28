@@ -12,7 +12,8 @@ using std::string;
 
 struct data {
 	string vardas = "", pavarde = "";
-	int paz[50] = { 0 }, egz = 0, n = 2;
+	int* p = nullptr; int n = 0;
+	int egz = 0;
 	double v = 0, m = 0;
 };
 
@@ -22,6 +23,8 @@ double vidurkis(data& s);
 
 double mediana(data& s);
 
+void addmark(data& s);
+
 void select(data& s);
 
 void output(data& s);
@@ -29,58 +32,61 @@ void output(data& s);
 
 int main() {
 	cout << "Jeigu jusu inputas buvo nepriimtas, vadinasi neteisingai ivedete, bandykite vesti is naujo pagal reikalavimus." << std::endl;
-	
+
 	int studentai;
 	cout << "Iveskite studentu skaiciu: ";
 	cin >> studentai;
-
 	while (cin.fail()) { // Apsauga ivedimui
 		cin.clear();
 		cin.ignore();
 		cin >> studentai;
 	}
-	
-	data* mas = new data[studentai];
+
+	data* s = new data[studentai];
 
 	for (int i = 0; i < studentai; i++) {
-		input(mas[i]);
-		select(mas[i]);
+		input(s[i]);
+		select(s[i]);
 	}
 	for (int i = 0; i < studentai; i++) {
-		output(mas[i]);
+		output(s[i]);
 	}
 
-	delete [] mas;
+	delete[] s;
 	system("pause");
 }
 
 void input(data& s) {
 	cout << "Iveskite studento varda: "; cin >> s.vardas;
 	cout << "Iveskite studento pavarde: "; cin >> s.pavarde;
+	cout << "Iveskite pazymiu kieki: ";
+
+	cin >> s.n;
+	while (cin.fail()) {
+		cin.ignore();
+		cin.clear();
+		cin >> s.n;
+	}
 
 	using hrClock = std::chrono::high_resolution_clock;
 	std::mt19937 mt(static_cast<long unsigned int>(hrClock::now().time_since_epoch().count()));
 	std::uniform_int_distribution<int> dist(1, 10);
 
-	cout << "Iveskite pazymiu kieki: "; cin >> s.n;
-	while (cin.fail()) { // Apsauga ivedimui
-		cin.ignore();
-		cin >> s.n;
+	s.p = new int[s.n];
+	for (int i = 0; i < s.n; i++) {
+		s.p[i] = dist(mt);
+		cout << "Ivestas " << i + 1 << "-asis pazimys: " << s.p[i] << std::endl;
 	}
-	for (int i = 1; i <= s.n; i++) {
-			s.paz[i] = dist(mt);
-			cout << i << "-asis pazymys: " << s.paz[i] << std::endl;
-	}
-		
 
 	s.egz = dist(mt);
 	cout << "Egzamino vertinimas: " << s.egz << std::endl;
+
 };
 
 double vidurkis(data& s) {
 	double v = 0;
 	for (int i = 0; i < s.n; i++) {
-		v += s.paz[i];
+		v += s.p[i];
 	}
 	v = v / s.n;
 
@@ -92,33 +98,33 @@ double vidurkis(data& s) {
 double mediana(data& s) {
 	double m = 0;
 	int temp = 0;
-	
+
 	for (int i = 0; i < s.n - 1; i++) {
 		for (int j = i + 1; j < s.n; j++) {
-			if (s.paz[j] < s.paz[i]) std::swap(s.paz[j], s.paz[i]);
+			if (s.p[j] < s.p[i]) std::swap(s.p[j], s.p[i]);
 		}
 	}
-	
+
 	temp = s.n;
 	if (temp % 2 != 0) {
 		double tem = temp;
 		int mazesnis = ((double)(tem / 2) - 0.5);
 		int didesnis = ((double)(tem / 2) + 0.5);
-		m = ((s.paz[mazesnis] + s.paz[didesnis]) / 2) * 0.4 + s.egz * 0.6;
+		m = ((s.p[mazesnis] + s.p[didesnis]) / 2) * 0.4 + s.egz * 0.6;
 	}
 	else {
-		m = s.paz[temp / 2] * 0.4 + s.egz * 0.6;
+		m = s.p[temp / 2] * 0.4 + s.egz * 0.6;
 	}
-	
+
 	return m;
 }
 
 void output(data& s) {
 	cout << std::left << std::setw(20) << "Pavarde" << std::left << std::setw(20) << "Vardas";
 	if (s.m == 0) cout << std::left << std::setw(20) << "Galutinis (Vid.)" << std::endl;
-	else if(s.v == 0) cout << std::left << std::setw(20) << "Galutinis (Med.)" << std::endl;
+	else if (s.v == 0) cout << std::left << std::setw(20) << "Galutinis (Med.)" << std::endl;
 
-	cout << string(60,  '-') << std::endl;
+	cout << string(60, '-') << std::endl;
 
 	cout << std::left << std::setw(20) << s.vardas << std::left << std::setw(20) << s.pavarde;
 	if (s.m == 0) cout << std::left << std::setw(23) << std::setprecision(3) << s.v << std::endl;
@@ -136,11 +142,7 @@ void select(data& s) {
 	else if (check == 'v' && s.n == 0) s.v = 0.6 * s.egz;
 	else if (check == 'm' && s.n != 0) s.m = mediana(s);
 	else if (check == 'm' && s.n == 0) s.m = 0.6 * s.egz;
-}
-
-
-
-
+};
 
 
 
