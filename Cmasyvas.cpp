@@ -12,7 +12,8 @@ using std::string;
 
 struct data {
 	string vardas = "", pavarde = "";
-	int* p = nullptr; int n = 0;
+	int* p = nullptr; 
+	int n = 0;
 	int egz = 0;
 	double v = 0, m = 0;
 };
@@ -23,11 +24,13 @@ double vidurkis(data& s);
 
 double mediana(data& s);
 
-void addmark(data& s);
-
 void select(data& s);
 
 void output(data& s);
+
+int genrand();
+
+void addmark(data& s, int& it);
 
 
 int main() {
@@ -36,23 +39,23 @@ int main() {
 	int studentai;
 	cout << "Iveskite studentu skaiciu: ";
 	cin >> studentai;
-	while (cin.fail()) { // Apsauga ivedimui
+	while (cin.fail()) {
 		cin.clear();
 		cin.ignore();
 		cin >> studentai;
 	}
 
-	data* s = new data[studentai];
+	data* mas = new data[studentai];
 
 	for (int i = 0; i < studentai; i++) {
-		input(s[i]);
-		select(s[i]);
+		input(mas[i]);
+		select(mas[i]);
 	}
 	for (int i = 0; i < studentai; i++) {
-		output(s[i]);
+		output(mas[i]);
 	}
 
-	delete[] s;
+	delete[] mas;
 	system("pause");
 }
 
@@ -68,17 +71,29 @@ void input(data& s) {
 		cin >> s.n;
 	}
 
-	using hrClock = std::chrono::high_resolution_clock;
-	std::mt19937 mt(static_cast<long unsigned int>(hrClock::now().time_since_epoch().count()));
-	std::uniform_int_distribution<int> dist(1, 10);
-
 	s.p = new int[s.n];
 	for (int i = 0; i < s.n; i++) {
-		s.p[i] = dist(mt);
+		s.p[i] = genrand();
 		cout << "Ivestas " << i + 1 << "-asis pazimys: " << s.p[i] << std::endl;
 	}
-
-	s.egz = dist(mt);
+	
+	int it;
+	char check;
+	do{
+		it = s.n;
+		cout << "Jei noretumete ivesti dar pazymiu iveskite 'y', jei ne 'n': ";
+		do {
+			cin >> check;
+		} while (check != 'y' && check != 'n');
+		if (check == 'y') {
+			addmark(s, it);
+			for (int i = it; i < s.n; i++) {
+				cout << "Ivestas " << i + 1 << "-asis pazimys: " << s.p[i] << std::endl;
+			}
+		}
+	} while (check != 'n');
+	
+	s.egz = genrand();
 	cout << "Egzamino vertinimas: " << s.egz << std::endl;
 
 };
@@ -142,6 +157,33 @@ void select(data& s) {
 	else if (check == 'v' && s.n == 0) s.v = 0.6 * s.egz;
 	else if (check == 'm' && s.n != 0) s.m = mediana(s);
 	else if (check == 'm' && s.n == 0) s.m = 0.6 * s.egz;
+};
+
+int genrand() {
+	using hrClock = std::chrono::high_resolution_clock;
+	std::mt19937 mt(static_cast<long unsigned int>(hrClock::now().time_since_epoch().count()));
+	std::uniform_int_distribution<int> dist(1, 10);
+	return dist(mt);
+};
+
+void addmark(data& s, int &it) {
+	int amount;
+	cout << "Iveskite pazymiu kieki: "; cin >> amount;
+	while (cin.fail()) { // Apsauga ivedimui
+		cin.clear();
+		cin.ignore();
+		cin >> amount;
+	}
+	int* temp = new int[it];
+	for (int i = 0; i < it; i++) temp[i] = s.p[i];
+	s.n += amount;
+	delete[] s.p;
+	s.p = new int[s.n];
+	for (int i = 0; i < s.n; i++) {
+		if (i < it) s.p[i] = temp[i];
+		else s.p[i] = genrand();
+	}
+	delete[] temp;
 };
 
 
