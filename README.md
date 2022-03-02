@@ -1,21 +1,11 @@
 # objective-programming
 Repository created for objective programming using C++
 
-## v0.1
+# v0.1
 Šioje versijoje uždavinys buvo sprendžiamas dviem budais:
-1. Cmasyvo būdu **Cmasyvas.cpp** faile
-2. Vektorių būdu **Vektoriai.cpp** faile
+1. Cmasyvo būdu **Cmasyvas.cpp** faile - Studento duomenys saugomi struktūroje *data*
+2. Vektorių būdu **Vektoriai.cpp** faile - Studento duomenys saugomi *data* tipo *vektoriuje*
 
-### Cmasyvas.cpp
-Studento duomenys saugomi struktūroje *data*
+Programa turi 7 funkcijas: input, output, mediana, vidurkis, select, addmark, genrandom. Programa paklausia vartotojo kiek jis noretų sugeneruoti studentų, paprašo įvesti vardą, pavardę, pažymių kiekį(po įvedimo galime pasirinkti ar norime papildytį kiekiį), pasirenkame kaip vesti rezultatą, medianos ar vidurkio metodu.
 
-### Vektoriai.cpp
-Studento duomenys saugomi *data* tipo *vektoriuje*
-\
-\
-Tiek **Cmasyvas.cpp**, tiek **Vektoriai.cpp** turi 5 funkcijas: *input*, *output*, *vidurkis*, *mediana*, *select* \
-**input** Ivedami studento duomenys: vardas, pavardė, namų darbai, egzamino rezultatas. Ivedimai yra apsaugoti taip, kad programa nesustotų. \
-**output** Išvedami studento duomenys: vardas, pavardė, pasirinktinai mediana arba vidurkis. \
-**vidurkis** Skaičiuoja studento galutinį vidurkį, pagal jo namų darbų vidurkį. \
-**mediana** Skaičiuoja studento galutinę medianą, pagal jo namų darbų medianą. \
-**select** Suteikia vartotojui galimybe pasirinkti kaip studentui vesti galutinį pažymį: medianos ar vidurkio metodu.
+Į terminalą išvedami šie duomenys: *Vardas*, *Pavardė*, *Galutinis rezultatas*(Vidurkis/Mediana).
