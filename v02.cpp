@@ -8,12 +8,16 @@
 #include <algorithm>
 #include <random>
 #include <chrono>
+#include <functional>
+#include <fstream>
 
 using std::cout;
 using std::cin;
 using std::string;
 using std::vector;
 using std::endl;
+using std::ifstream;
+using std::ofstream;
 
 struct data {
 	string vardas = "", pavarde = "";
@@ -23,25 +27,25 @@ struct data {
 	double v = 0, m = 0;
 };
 
+// Generavimas
 void input(data& s, char vm);
+void output(data& s, char vm);
+void addmark(data& s, int& it, int& kiek);
 
+// Skaiciavimai
+double vidurkis(vector<int> p, int egz);
+double mediana(vector<int> p, int egz);
 void select(vector<data>& s, char vm);
 
-double vidurkis(vector<int> p, int egz);
-
-double mediana(vector<int> p, int egz);
-
-void output(data& s, char vm);
-
+// Apsaugos
 void tabletop(char vm);
-
 int genrand();
 
-void addmark(data& s, int& it, int &kiek);
+// Darbui su failu
+void failoSkaitymas(ifstream& fd, vector<data>& s, vector<string>& l);
+//void failoIsvedimas(ofstream& fp, vector<data>& s, vector<string>& l);
+void failoIsvedimas(ofstream& fp, vector<data>& s);
 
-bool fist_name(data x, data y);
-
-bool last_name(data x, data y);
 
 
 int main() {
@@ -56,16 +60,29 @@ int main() {
 		cin >> howInput;
 	} while (howInput != 'y' && howInput != 'n');
 
-	cout << "Jei norite kad programa isvestu vidurki iveskite 'v', jeigu mediana, iveskite 'm': ";
-	do {
-		cin >> vm;
-	} while (vm != 'v' && vm != 'm');
 
-	if (howInput == 'y') {
+	vector<data> s;
+
+	if (howInput == 'y') { // Skaitymas is failo
+		std::ifstream fr("studentai.txt");
+		std::ofstream fp("kursiokai.txt");
+		vector<string> head;
+		failoSkaitymas(fr, s, head);
+		select(s, howInput);
+		tabletop(howInput);
+		for (int i = 0; i < s.size(); i++) {
+			failoIsvedimas(fp, s);
+		}
 
 	}
 
-	else if (howInput == 'n') {
+	else if (howInput == 'n') { // Generavimas / rasymas
+
+		cout << "Jei norite kad programa isvestu vidurki iveskite 'v', jeigu mediana, iveskite 'm': ";
+		do {
+			cin >> vm;
+		} while (vm != 'v' && vm != 'm');
+
 		int studentai;
 		cout << "Iveskite studentu skaiciu: ";
 		cin >> studentai;
@@ -75,8 +92,6 @@ int main() {
 			cin >> studentai;
 		}
 
-		vector<data> s;
-		 // Laikina struktura kuri veliau patalpinama i vektoriu
 		s.reserve(studentai);
 		for (int i = 0; i < studentai; i++) {
 			data temp;
@@ -89,7 +104,7 @@ int main() {
 			output(s.at(i), vm);
 		}
 
-		s.clear(); // Atlaisvinama vieta
+		s.clear(); 
 	}
 	
 
@@ -111,7 +126,6 @@ void input(data& s, char vm) {
 	//s.p.resize(kiek);
 	for (int i = 0; i < kiek; i++) {
 		pazimys = genrand();
-		cout << "pazimys: " << pazimys << endl;
 		s.p.push_back(pazimys);
 		cout << "Ivestas " << i + 1 << "-asis pazimys: " << pazimys << endl;
 	}
@@ -120,7 +134,7 @@ void input(data& s, char vm) {
 	int it;
 	char check;
 	do {
-		it = s.n;
+		it = kiek;
 		cout << "Jei noretumete ivesti dar pazymiu iveskite 'y', jei ne 'n': ";
 		do {
 			cin >> check;
@@ -139,10 +153,46 @@ void input(data& s, char vm) {
 	
 };
 
+void failoSkaitymas(ifstream& fr, vector<data>& s, vector<string>& l) {
+	
+	string length;
+	
+	while ((fr.peek() != '\n') && (fr >> length)) {
+		l.push_back(length);
+	}
+	l.resize(l.size() - 3);
+
+	int pazimys;
+	while (!fr.eof()) {
+		data temp;
+		fr >> temp.vardas >> temp.pavarde;
+		cout << temp.vardas << temp.pavarde << endl; //
+		for (auto& el : l) {
+			fr >> pazimys;
+			cout << pazimys << " "; //
+			temp.p.push_back(pazimys);
+		}
+		cout << endl; //
+		fr >> temp.egz;
+		cout << temp.egz << endl;
+		temp.n = temp.p.size();
+		s.push_back(temp);
+	}
+	
+};
+
+void failoIsvedimas(ofstream& fp, vector<data>& s) {
+	//cout << s.vardas << endl;
+};
+
 void select(vector<data>& s, char vm) {
 	for (auto& el : s) {
 		if (vm == 'v') el.v = vidurkis(el.p, el.egz);
 		else if (vm == 'm') el.m = mediana(el.p, el.egz);
+		else if (vm == 'y') {
+			el.m = mediana(el.p, el.egz);
+			el.v = vidurkis(el.p, el.egz);
+		}
 	}
 };
 
@@ -160,27 +210,25 @@ double vidurkis(vector<int> p, int egz) {
 
 double mediana(vector<int> p, int egz) {
 
-	double m;
+	double m, s;
 	sort(p.begin(), p.end());
-	
 	if (p.size() % 2 == 0 && p.size() != 0) {
-		m = (p[p.size() / 2] + p[(p.size() / 2) - 1] * 1.0 / 2) * 0.4 + egz * 0.6; // lyginis
-		cout << "lyginis ima abu" << endl;
+		m = (double)((p[p.size() / 2] + p[p.size() / 2 - 1]) / 2);
+		s = (m * 4 / 10) + (egz * 0.6);
 	}
 	else if (p.size() % 2 != 0 && p.size() != 0) {
-		m = p[p.size() / 2] * 0.4 + egz * 0.6;
-		cout << "NEEEEEEEEelyginis ima abu" << endl;
+		s = p[p.size() / 2] * 0.4 + egz * 0.6;
 	}
-	else m = egz * 0.6;
+	else s = egz * 0.6;
 
-	return m;
+	return s;
 };
 
 void tabletop(char vm) {
-
 	cout << std::left << std::setw(20) << "Pavarde" << std::left << std::setw(20) << "Vardas";
-	if (vm == 'v') cout << std::left << std::setw(20) << "Galutinis (Vid.)" << endl;
-	else if (vm == 'm') cout << std::left << std::setw(20) << "Galutinis (Med.)" << endl;
+	if (vm == 'v') cout << std::left << std::setw(20) << "Pavarde" << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Galutinis (Vid.)" << endl;
+	else if (vm == 'm') cout << std::left << std::setw(20) << "Pavarde" << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Galutinis (Med.)" << endl;
+	else if (vm == 'y') cout << std::left << std::setw(20) << "Pavarde" << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Galutinis (Vid.)" << std::left << std::setw(20) << "Galutinis (Med.)" << endl;
 };
 
 void output(data& s, char vm) {
@@ -200,10 +248,11 @@ int genrand() {
 
 	return sk;
 };
+
 void addmark(data& s, int& it, int& kiek) {
 	kiek += 1;
 	int pazimys;
-	s.p.reserve(s.n);
+	s.p.reserve(kiek);
 	
 	for (int i = it; i < kiek; i++) {
 		pazimys = genrand();
@@ -212,13 +261,6 @@ void addmark(data& s, int& it, int& kiek) {
 	s.p.shrink_to_fit();
 };
 
-bool fist_name(data x, data y) {
-	return x.vardas < y.vardas;
-};
-
-bool last_name(data x, data y) {
-	return x.pavarde < y.pavarde;
-};
 
 
 
