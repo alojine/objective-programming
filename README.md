@@ -11,3 +11,10 @@ Programa turi 7 funkcijas: input, output, mediana, vidurkis, select, addmark, ge
 Į terminalą išvedami šie duomenys: *Vardas*, *Pavardė*, *Galutinis rezultatas*(Vidurkis/Mediana).
 
 # v0.2
+Šioje versijoje kodas yra atnaujintas, pridėtas skaitymas ir rašymas į failą. 
+
+Paleidus programa vartotojo paklausiama ar jis nori skaityti studentus iš failo:
+
+Jei **ne**: vyksta praeitos versijos **v0.1** skaitymas iš terminalo.
+
+Jei **taip**: Nuskaitomas failas *studentai.txt*, į failą *kursiokai.txt* išvedamas studento vardas, pavardė, galutinis vidukis ir mediana.
