@@ -20,8 +20,7 @@ Jei **ne**: vyksta praeitos versijos **v0.1** skaitymas iš terminalo.
 Jei **taip**: Nuskaitomas failas *studentai.txt*, į failą *kursiokai.txt* išvedamas studento vardas, pavardė, galutinis vidukis ir mediana.
 
 # v0.3
-Šioje versijoje atliktas praeitos versijos(v0.2) kodo refactoringas.
-
-Programa veikia tuo pačiu principu, tačiau yra išskaidyta į header ir resource failų aplankus.
-
-Pagrindinis failas: *Source.cpp* laiko header failus ir pagrindinę main funkcija kurioje atliktas exception handling failo įvedimui.
+Šioje versijoje atliktas praeitos versijos(v0.2) kodo refactoringas. Programa veikia tuo pačiu principu, tačiau yra išskaidyta į header ir resource ir source failus.
+1. Pagrindinis failas: *Source.cpp* savyje laiko header failus ir pagrindinę main funkcija kurioje atliktas exception handling skaitymui ir rašymui į failą.
+2. Aplanke: *Headers* yra visi programai reikalingi header(.h) failai.
+3. Aplanke: *Resources* yra visi programai reikalingi papildomi (.cpp) faila kuriuose aprašytos funkcijos.
