@@ -37,16 +37,14 @@ double vidurkis(vector<int> p, int egz);
 double mediana(vector<int> p, int egz);
 void select(vector<data>& s, char vm);
 
-// Apsaugos
+// Pagalbiniai irankiai
 void tabletop(char vm);
 int genrand();
 
 // Darbui su failu
 void failoSkaitymas(ifstream& fd, vector<data>& s, vector<string>& l);
-//void failoIsvedimas(ofstream& fp, vector<data>& s, vector<string>& l);
-void failoIsvedimas(ofstream& fp, vector<data>& s);
-
-
+void failoIsvedimas(ofstream& fp, data& s);
+void failoAntraste(ofstream& fp);
 
 int main() {
 
@@ -60,18 +58,19 @@ int main() {
 		cin >> howInput;
 	} while (howInput != 'y' && howInput != 'n');
 
-
 	vector<data> s;
 
 	if (howInput == 'y') { // Skaitymas is failo
+
 		std::ifstream fr("studentai.txt");
 		std::ofstream fp("kursiokai.txt");
-		vector<string> head;
+		vector<string> head; // virsutines eilutes nuskaitymas
 		failoSkaitymas(fr, s, head);
 		select(s, howInput);
-		tabletop(howInput);
-		for (int i = 0; i < s.size(); i++) {
-			failoIsvedimas(fp, s);
+		failoAntraste(fp);
+		std::sort(s.begin(), s.end(), [](data& x, data& y) {return x.vardas < y.vardas; }); // rikiavimas pagal varda
+		for (auto& el : s) {
+			failoIsvedimas(fp, el);
 		}
 
 	}
@@ -123,7 +122,6 @@ void input(data& s, char vm) {
 		cin.ignore();
 		cin >> kiek;
 	}
-	//s.p.resize(kiek);
 	for (int i = 0; i < kiek; i++) {
 		pazimys = genrand();
 		s.p.push_back(pazimys);
@@ -166,23 +164,19 @@ void failoSkaitymas(ifstream& fr, vector<data>& s, vector<string>& l) {
 	while (!fr.eof()) {
 		data temp;
 		fr >> temp.vardas >> temp.pavarde;
-		cout << temp.vardas << temp.pavarde << endl; //
 		for (auto& el : l) {
 			fr >> pazimys;
-			cout << pazimys << " "; //
 			temp.p.push_back(pazimys);
 		}
-		cout << endl; //
 		fr >> temp.egz;
-		cout << temp.egz << endl;
 		temp.n = temp.p.size();
 		s.push_back(temp);
 	}
 	
 };
 
-void failoIsvedimas(ofstream& fp, vector<data>& s) {
-	//cout << s.vardas << endl;
+void failoIsvedimas(ofstream& fp, data& s) {
+	fp << std::left << std::setw(20) << s.vardas << std::left << std::setw(20) << s.pavarde << std::left << std::setw(20) << std::setprecision(3) << s.v << std::left << std::setw(20) << std::setprecision(3) << s.m << endl;
 };
 
 void select(vector<data>& s, char vm) {
@@ -224,19 +218,23 @@ double mediana(vector<int> p, int egz) {
 	return s;
 };
 
+void failoAntraste(ofstream& fp) {
+
+	fp << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Pavarde" << std::left << std::setw(20) << "Galutinis (Vid.)" << std::left << std::setw(20) << "Galutinis (Med.)" << endl;
+	fp << string(80, '-') << std::endl;
+};
+
 void tabletop(char vm) {
-	cout << std::left << std::setw(20) << "Pavarde" << std::left << std::setw(20) << "Vardas";
-	if (vm == 'v') cout << std::left << std::setw(20) << "Pavarde" << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Galutinis (Vid.)" << endl;
-	else if (vm == 'm') cout << std::left << std::setw(20) << "Pavarde" << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Galutinis (Med.)" << endl;
-	else if (vm == 'y') cout << std::left << std::setw(20) << "Pavarde" << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Galutinis (Vid.)" << std::left << std::setw(20) << "Galutinis (Med.)" << endl;
+	if (vm == 'm') cout << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Pavarde" << std::left << std::setw(20) << "Galutinis (Med.)" << endl;
+	else if (vm == 'v') cout << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Pavarde" << std::left << std::setw(20) << "Galutinis (Vid.)" << endl;
 };
 
 void output(data& s, char vm) {
 
 	cout << string(60, '-') << std::endl;
 	cout << std::left << std::setw(20) << s.vardas << std::left << std::setw(20) << s.pavarde;
-	if (vm == 'v') cout << std::left << std::setw(23) << std::setprecision(3) << s.v << endl;
-	else if (vm == 'm') cout << std::left << std::setw(20) << std::setprecision(3) << s.m << endl;
+	if (vm == 'v') cout << std::left << std::setw(23) << std::setprecision(2) << s.v << endl;
+	else if (vm == 'm') cout << std::left << std::setw(20) << std::setprecision(2) << s.m << endl;
 };
 
 int genrand() {
