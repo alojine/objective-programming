@@ -38,9 +38,45 @@ Programos kodas yra isskaidytas į tris pagrindinius failus:
 4. Failo skaitymas vyksta iš ivesto failo. Pvz: studentai100000.txt.
 5. Failo išvedimas vyksta į du skirtingus failus: *kietiakai.txt*(studentams kurių galutinis balas >= 5.0) ir *nuskriaustukai.txt* (studentams kurių galutinis balas < 5.0).
 
+Testavimui generuojami 5 atsitiktiniai studentų pažymiai.
 Programos laikas nustatomas šiems kriterijams:
 1. Failo kūrimui ir jo uždarymui.
 2. Duomenų nuskaitymui iš failo.
 3. Studentų rušiavimui į grupes.
 4. Surušiuotų studentų išvedimą į du failus.
 5. Visos programos laikas.
+
+1000 failas:
+1. 0.0820 s
+2. 0.0800 s
+3. 0.0011 s
+4. 0.0018 s || 0.0016 s
+5. 0.2068 s
+
+10000 failas:
+1.  0.7874 s
+2.  0.7304 s
+3.  0.0846 s
+4.  0.0142 s || 0.0116 s
+5. 1.9635 s
+
+100000 failas:
+1.  7.8920 s
+2.  7.4033 s
+3.  0.8269 s
+4.  0.1340 s || 0.0998 s
+5.  20.4671 s
+
+1000000 failas:
+1. 79.40 s
+2. 69.98 s
+3. 8.2202 s
+4. 1.4142 s || 0.9707 s
+5.  209.14 s
+
+10000000 failas:
+1. 802.87 s
+2. 766.69 s
+3. 96.68 s
+4. 43.26 s || 48.69 s
+5. 1758.19 s
