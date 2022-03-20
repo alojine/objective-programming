@@ -24,3 +24,23 @@ Jei **taip**: Nuskaitomas failas *studentai.txt*, į failą *kursiokai.txt* išv
 1. Pagrindinis failas: *Source.cpp* savyje laiko header failus ir pagrindinę main funkcija kurioje atliktas exception handling skaitymui ir rašymui į failą.
 2. Aplanke: *Headers* yra visi programai reikalingi header(.h) failai.
 3. Aplanke: *Resources* yra visi programai reikalingi papildomi (.cpp) faila kuriuose aprašytos funkcijos.
+
+# v0.4
+Šioje versijoje sukurtas failu generatorius ir matuojami programos vykdymo laikai.
+Vartotojas pasirenka generuoti failą automatiškai.
+Vartotojas pasirenka naudoti failų generatorių.
+Vartotojas iveda failo pavadinimą ir kiekį studentų kuriuos nori sugeneruoti.
+
+Programos kodas yra isskaidytas į tris pagrindinius failus:
+1. Pagrindinis failas *Source.cpp* laiko (header) antraštes ir main funkciją.
+2. *functions.cpp* laiko savyje funkcijų aprašus.
+3. *headers.h* laiko savyje funkcijų antraštes
+4. Failo skaitymas vyksta iš ivesto failo. Pvz: studentai100000.txt.
+5. Failo išvedimas vyksta į du skirtingus failus: *kietiakai.txt*(studentams kurių galutinis balas >= 5.0) ir *nuskriaustukai.txt* (studentams kurių galutinis balas < 5.0).
+
+Programos laikas nustatomas šiems kriterijams:
+1. Failo kūrimui ir jo uždarymui.
+2. Duomenų nuskaitymui iš failo
+3. Studentų rušiavimui į grupes.
+4. Surušiuotų studentų išvedimą į du failus.
+5. Visos programos laikas
