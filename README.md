@@ -40,7 +40,7 @@ Programos kodas yra isskaidytas į tris pagrindinius failus:
 
 Programos laikas nustatomas šiems kriterijams:
 1. Failo kūrimui ir jo uždarymui.
-2. Duomenų nuskaitymui iš failo
+2. Duomenų nuskaitymui iš failo.
 3. Studentų rušiavimui į grupes.
 4. Surušiuotų studentų išvedimą į du failus.
-5. Visos programos laikas
+5. Visos programos laikas.
