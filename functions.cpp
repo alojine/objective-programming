@@ -66,14 +66,13 @@ void output(data& s, char vm) {
 //-------------------------------------------------------------------------------------------------------------------
 
 void failoGeneratorius(ofstream& fr, int a) {
-	
+	auto laikasFailoKurimas = hrClock::now();
 	vector<string> splitted;
 	string eil;
 	std::stringstream buffer; // buferis
 	int b = 5;
 
-	typedef std::chrono::high_resolution_clock Clock;
-	auto st = Clock::now();
+	auto st = hrClock::now();
 
 	buffer << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Pavarde";
 	for (int i = 0; i < b; i++) {
@@ -86,7 +85,7 @@ void failoGeneratorius(ofstream& fr, int a) {
 	}
 
 	fr << buffer.rdbuf();
-
+	cout << "Failo kurimas ir jo uzdarymas uztruko: " << durationDouble(hrClock::now() - laikasFailoKurimas).count() << " s" << endl;
 };
 
 std::stringstream studentoGeneratorius(int b, int nr) {
@@ -100,6 +99,7 @@ std::stringstream studentoGeneratorius(int b, int nr) {
 };
 
 void buffSkaitymas(vector<data>& s, string fname) {
+	auto laikasSkaitymas = hrClock::now();
 	std::stringstream buffer;
 	string l;
 	ifstream open_f;
@@ -128,7 +128,56 @@ void buffSkaitymas(vector<data>& s, string fname) {
 		s.push_back(temp);
 	}
 
+	cout << "Failo skaitymas uztruko: " << durationDouble(hrClock::now() - laikasSkaitymas).count() << " s" << endl;
 };
+
+void buffRasymas(vector<data>& s, string fname, char vm) {
+	std::stringstream buffer;
+	buffer << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Pavarde";
+	if (vm == 'y') buffer << std::left << std::setw(20) << "Galutinis(Vid.)";
+	else if(vm == 'n') buffer << std::left << std::setw(20) << "Galutinis(Med.)";
+	buffer << endl;
+
+	if (vm == 'y') {
+		for (auto& el : s) {
+			buffer << std::left << std::setw(20) << el.vardas << std::left << std::setw(20) << el.pavarde << std::left << std::setw(20) << std::fixed << std::setprecision(2) << el.v << endl;
+		}
+	}
+
+	else if (vm == 'n') {
+		for (auto& el : s) {
+			buffer << std::left << std::setw(20) << el.vardas << std::left << std::setw(20) << el.pavarde << std::left << std::setw(20) << std::fixed << std::setprecision(2) << el.m << endl;
+		}
+	}
+
+	buffer.clear();
+
+	buffFaila(fname, buffer);
+
+};
+
+void buffFaila(string fname, std::stringstream& buffer) {
+	ofstream fp(fname);
+	fp << buffer.rdbuf();
+	fp.close();
+}
+
+void skirstymas(vector<data> &s, std::stringstream& kietiakai, std::stringstream& nuskriaustukai, char vm) {
+	auto laikasSkirstymas = hrClock::now();
+	for (auto& el : s) {
+		if (vm == 'y') {
+			if (el.v >= 5) kietiakai << std::left << std::setw(20) << el.vardas << std::left << std::setw(20) << el.pavarde << std::left << std::setw(20) << std::fixed << std::setprecision(2) << el.v << endl;
+			else nuskriaustukai << std::left << std::setw(20) << el.vardas << std::left << std::setw(20) << el.pavarde << std::left << std::setw(20) << std::fixed << std::setprecision(2) << el.v << endl;
+		}
+		else {
+			if (el.m >= 5) kietiakai << std::left << std::setw(20) << el.vardas << std::left << std::setw(20) << el.pavarde << std::left << std::setw(20) << std::fixed << std::setprecision(2) << el.m << endl;
+			else nuskriaustukai << std::left << std::setw(20) << el.vardas << std::left << std::setw(20) << el.pavarde << std::left << std::setw(20) << std::fixed << std::setprecision(2) << el.m << endl;
+		}
+	}
+	s.clear();
+
+	cout << "Failo skirstymas i grupes uztruko: " << durationDouble(hrClock::now() - laikasSkirstymas).count() << " s" << endl;
+}
 
 void failoSkaitymas(ifstream& fr, vector<data>& s, vector<string>& l) {
 

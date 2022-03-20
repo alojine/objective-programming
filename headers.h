@@ -24,6 +24,9 @@ using std::endl;
 using std::ifstream;
 using std::ofstream;
 
+using hrClock = std::chrono::high_resolution_clock;
+using durationDouble = std::chrono::duration<double>;
+
 struct data {
 	string vardas = "", pavarde = "";
 	vector<int> p;
@@ -51,3 +54,7 @@ void failoAntraste(ofstream& fp);
 
 void failoGeneratorius(ofstream& fr, int a);
 std::stringstream studentoGeneratorius(int b, int nr);
+void buffSkaitymas(vector<data>& s, string fname);
+void buffRasymas(vector<data>& s, string fname, char vm);
+void buffFaila(string fname, std::stringstream& buffer);
+void skirstymas(vector<data>& s, std::stringstream& kietiakai, std::stringstream& nuskriaustukai, char vm);
