@@ -37,7 +37,7 @@ struct data {
 
 double vidurkis(vector<int> p, int egz);
 double mediana(vector<int> p, int egz);
-void select(vector<data>& s, char vm);
+void skaiciavimai(vector<data>& s, char vm);
 
 void input(data& s);
 void output(data& s, char vm);
@@ -57,4 +57,4 @@ std::stringstream studentoGeneratorius(int b, int nr);
 void buffSkaitymas(vector<data>& s, string fname);
 void buffRasymas(vector<data>& s, string fname, char vm);
 void buffFaila(string fname, std::stringstream& buffer);
-void skirstymas(vector<data>& s, std::stringstream& kietiakai, std::stringstream& nuskriaustukai, char vm);
+void paskirstymas(vector<data>& s, vector<data>& Kieti, vector<data>& Vargsai, char vm);

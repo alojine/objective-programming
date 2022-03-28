@@ -2,53 +2,66 @@
 
 int main() {
 
-	cout << "Jei norite skaityti duomenis is failo iveskite 'y', jei generuoti atsitiktinai 'n': ";
+	cout << "Ar norite skityti duomenis is failo? (y/n) ";
 	char howInput = charApsauga(howInput);
 
 	vector<data> s;
 
 	if (howInput == 'y') { // Skaitymas is failo
-		// Exeption handling
 
-		cout << "Jei norite naudoti failu generatoriu iveskite 'y', jei ne 'n': ";
+		cout << "Ar norite ivesti faila? (y/n) ";
 		char gen = charApsauga(gen);
 
 		if (gen == 'y') { // Naudoja generatoriu
+			do {
+				
 			
-			string fname; int skiekis;
-			cout << "Iveskite failo pavadinima: ";
-			cin >> fname;
-			cout << "Iveskite studentu kieki: ";
-			cin >> skiekis;
-			cout << "Jei norite kad programa isvestu vidurki iveskite 'y', jeigu mediana, iveskite 'n': ";
-			char vm = charApsauga(vm);
-			cout << endl;
+				string fname; int skiekis;
+				cout << "Iveskite failo pavadinima: ";
+				cin >> fname;
+				cout << "Iveskite studentu kieki: ";
+				cin >> skiekis;
+				cout << "(Vidurkis/Mediana) - (y/n) ";
+				char vm = charApsauga(vm);
+				cout << endl;
+
+				s.reserve(skiekis);
 			
-			auto laikasVisa = hrClock::now();
+				auto laikasVisa = hrClock::now();
 
-			string n = "nuskriaustukai.txt", k = "kietiakai.txt"; std::stringstream nuskriaustukai; std::stringstream kietiakai;
-			ofstream out_f(fname);
+				string n = "nuskriaustukai.txt", k = "kietiakai.txt";
+				vector<data> Kieti;
+				vector<data> Vargsai;
 
-			failoGeneratorius(out_f, skiekis);
-			out_f.close();
+				ofstream out_f(fname);
+
+				failoGeneratorius(out_f, skiekis);
+				out_f.close();
 
 			
-			buffSkaitymas(s, fname);
-			select(s, vm);
-			std::sort(s.begin(), s.end(), [](data& x, data& y) {return x.vardas < y.vardas; });
+				buffSkaitymas(s, fname);
+				skaiciavimai(s, vm);
+				std::sort(s.begin(), s.end(), [](data& x, data& y) {return x.vardas < y.vardas; });
 
-			skirstymas(s, kietiakai, nuskriaustukai, vm);
+				paskirstymas(s, Kieti, Vargsai, vm);
 			
-			auto laikasKietiakai = hrClock::now();
-			buffFaila(k, kietiakai);
-			cout << "Kietieku surasymas uztruko: " << durationDouble(hrClock::now() - laikasKietiakai).count() << " s" << endl;
+				auto laikasKietiakai = hrClock::now();
+				buffRasymas(Kieti, k, vm);
+				cout << "Kietieku surasymas uztruko: " << durationDouble(hrClock::now() - laikasKietiakai).count() << " s" << endl;
 
-			auto laikasNuskriaustukai = hrClock::now();
-			buffFaila(n, nuskriaustukai);
-			cout << "Nuskriaustuku surasymas uztruko: " << durationDouble(hrClock::now() - laikasNuskriaustukai).count() << " s" << endl;
+				auto laikasNuskriaustukai = hrClock::now();
+				buffRasymas(Vargsai, n, vm);
+				cout << "Nuskriaustuku surasymas uztruko: " << durationDouble(hrClock::now() - laikasNuskriaustukai).count() << " s" << endl;
 
-			cout << "Visa programa uztruko " << durationDouble(hrClock::now() - laikasVisa).count() << " s" << endl;
+				cout << "Visa programa uztruko " << durationDouble(hrClock::now() - laikasVisa).count() << " s" << endl;
+				cout << endl;
 
+				cout << "Ar norite ivesti dar viena faila? (y/n) ";
+				char oneMore = charApsauga(oneMore);
+				gen = oneMore;
+				cout << endl;
+				
+			} while (gen == 'y');
 		}
 
 		else if (gen == 'n') { // Skaito viena faila
@@ -56,8 +69,9 @@ int main() {
 				std::ifstream fr("studentai.txt");
 				std::ofstream fp("kursiokai.txt");
 				vector<string> head; // virsutines eilutes nuskaitymas
-				failoSkaitymas(fr, s, head);
-				select(s, 'abu');
+				//failoSkaitymas(fr, s, head);
+				buffSkaitymas(s, "studentai.txt");
+				skaiciavimai(s, 'abu');
 				failoAntraste(fp);
 				std::sort(s.begin(), s.end(), [](data& x, data& y) {return x.vardas < y.vardas; }); // rikiavimas pagal varda
 				for (auto& el : s) {
@@ -85,7 +99,7 @@ int main() {
 			input(temp);
 			s.push_back(temp);
 		}
-		select(s, vm);
+		skaiciavimai(s, vm);
 		tabletop(vm);
 		for (int i = 0; i < s.size(); i++) {
 			output(s.at(i), vm);

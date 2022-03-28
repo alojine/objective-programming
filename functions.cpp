@@ -66,11 +66,10 @@ void output(data& s, char vm) {
 //-------------------------------------------------------------------------------------------------------------------
 
 void failoGeneratorius(ofstream& fr, int a) {
-	auto laikasFailoKurimas = hrClock::now();
 	vector<string> splitted;
 	string eil;
 	std::stringstream buffer; // buferis
-	int b = 5;
+	int b = 3;
 
 	auto st = hrClock::now();
 
@@ -85,7 +84,7 @@ void failoGeneratorius(ofstream& fr, int a) {
 	}
 
 	fr << buffer.rdbuf();
-	cout << "Failo kurimas ir jo uzdarymas uztruko: " << durationDouble(hrClock::now() - laikasFailoKurimas).count() << " s" << endl;
+	
 };
 
 std::stringstream studentoGeneratorius(int b, int nr) {
@@ -153,7 +152,7 @@ void buffRasymas(vector<data>& s, string fname, char vm) {
 	buffer.clear();
 
 	buffFaila(fname, buffer);
-
+	s.clear();
 };
 
 void buffFaila(string fname, std::stringstream& buffer) {
@@ -162,20 +161,24 @@ void buffFaila(string fname, std::stringstream& buffer) {
 	fp.close();
 }
 
-void skirstymas(vector<data> &s, std::stringstream& kietiakai, std::stringstream& nuskriaustukai, char vm) {
+
+
+void paskirstymas(vector<data>& s, vector<data>& Kieti, vector<data>& Vargsai, char vm) {
 	auto laikasSkirstymas = hrClock::now();
-	for (auto& el : s) {
-		if (vm == 'y') {
-			if (el.v >= 5) kietiakai << std::left << std::setw(20) << el.vardas << std::left << std::setw(20) << el.pavarde << std::left << std::setw(20) << std::fixed << std::setprecision(2) << el.v << endl;
-			else nuskriaustukai << std::left << std::setw(20) << el.vardas << std::left << std::setw(20) << el.pavarde << std::left << std::setw(20) << std::fixed << std::setprecision(2) << el.v << endl;
+	if (vm == 'y') {
+		for (auto& el : s) {
+			if (el.v >= 5) Kieti.push_back(el);
+			else Vargsai.push_back(el);
 		}
-		else {
-			if (el.m >= 5) kietiakai << std::left << std::setw(20) << el.vardas << std::left << std::setw(20) << el.pavarde << std::left << std::setw(20) << std::fixed << std::setprecision(2) << el.m << endl;
-			else nuskriaustukai << std::left << std::setw(20) << el.vardas << std::left << std::setw(20) << el.pavarde << std::left << std::setw(20) << std::fixed << std::setprecision(2) << el.m << endl;
+	}
+
+	if (vm == 'n') {
+		for (auto& el : s) {
+			if (el.m >= 5) Kieti.push_back(el);
+			else Vargsai.push_back(el);
 		}
 	}
 	s.clear();
-
 	cout << "Failo skirstymas i grupes uztruko: " << durationDouble(hrClock::now() - laikasSkirstymas).count() << " s" << endl;
 }
 
@@ -235,7 +238,7 @@ char charApsauga(char& a) {
 
 //-------------------------------------------------------------------------------------------------------------------
 
-void select(vector<data>& s, char vm) {
+void skaiciavimai(vector<data>& s, char vm) {
 	for (auto& el : s) {
 		if (vm == 'y') el.v = vidurkis(el.p, el.egz);
 		else if (vm == 'n') el.m = mediana(el.p, el.egz);
