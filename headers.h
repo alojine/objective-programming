@@ -16,6 +16,7 @@
 #include <sstream>
 #include <string>
 
+
 using std::cout;
 using std::cin;
 using std::string;
@@ -23,7 +24,6 @@ using std::vector;
 using std::endl;
 using std::ifstream;
 using std::ofstream;
-
 using hrClock = std::chrono::high_resolution_clock;
 using durationDouble = std::chrono::duration<double>;
 
@@ -52,7 +52,9 @@ void failoSkaitymas(ifstream& fd, vector<data>& s, vector<string>& l);
 void failoIsvedimas(ofstream& fp, data& s);
 void failoAntraste(ofstream& fp);
 
-void failoGeneratorius(ofstream& fr, int a);
+//void failoGeneratorius(ofstream& fr, int a);
+void generuotifailus(string& failopavadinimas, int kiek, int nd);
+void skaitymas(vector<data>& s, string fname);
 std::stringstream studentoGeneratorius(int b, int nr);
 void buffSkaitymas(vector<data>& s, string fname);
 void buffRasymas(vector<data>& s, string fname, char vm);

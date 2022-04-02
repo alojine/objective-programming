@@ -87,6 +87,72 @@ void failoGeneratorius(ofstream& fr, int a) {
 	
 };
 
+void generuotifailus(string& failopavadinimas, int kiek, int nd) {
+
+	ofstream rf(failopavadinimas);
+
+	string ndskaicius = "ND";
+	string vardas = "Vardas";
+	string pavarde = "Pavarde";
+
+	auto start = hrClock::now();    // pradedamas skaiciavimas
+
+	rf << std::left << std::setw(15) << "Vardas" << std::right << std::setw(15) << "Pavarde";
+	for (int i = 0; i < nd; i++) {
+		rf << std::right << std::setw(15) << ndskaicius + std::to_string(i + 1);
+	}
+	rf << std::right << std::setw(15) << "Egz." << endl;
+
+	for (int i = 0; i < kiek; i++) {
+		rf << std::left << std::setw(15) << vardas + std::to_string(i + 1) << std::right << std::setw(15) << pavarde + std::to_string(i + 1);
+		for (int j = 0; j < nd; j++) {
+			rf << std::right << std::setw(15) << genrand();
+		}
+		rf << std::right << std::setw(15) << genrand(); if (i + 1 != kiek) rf << endl;    // if sakinys, kad isvengti papildomo nuskaitymo kai pabaigoje failo endline ideda
+	}
+
+	cout << "Failo sudarymas uztruko: " << durationDouble(hrClock::now() - start).count() << endl;
+
+	rf.close();
+}
+
+void skaitymas(vector<data>& s, string fname) {
+	auto laikasSkaitymas = hrClock::now();
+	ifstream fd(fname);
+	if (fd.is_open()) {
+		int nd, egz;
+		int st = 0, mk = 0;
+		string line;
+		std::stringstream buffer;
+		std::getline(fd, line);
+		
+
+		// Nustatomas mokiniu kiekis
+		buffer << line;
+		string reiksme;
+		while (buffer >> reiksme) st++;
+		for (int l = 0; std::getline(fd, line); l++) mk++;
+		fd.clear();
+		fd.seekg(0);
+		std::getline(fd, line);
+
+		data temp;
+		for (int i = 0; i < mk; i++) {
+			fd >> temp.vardas >> temp.pavarde;
+			temp.p.reserve(st - 3);
+			for (int j = 0; j < st - 3; j++) {
+				fd >> nd;
+				temp.p.push_back(nd);
+			}
+			fd >> temp.egz;
+			temp.p.clear();
+			s.push_back(temp);
+		}
+	}
+	fd.close();
+	cout << "Failo nuskaitymas uztruko: " << durationDouble(hrClock::now() - laikasSkaitymas).count() << " s" << endl;
+}
+
 std::stringstream studentoGeneratorius(int b, int nr) {
 	std::stringstream studentas;
 	studentas << "Vardas" << std::left << std::setw(14) << nr + 1 << "Pavarde" << std::left << std::setw(13) << nr + 1;
@@ -130,7 +196,15 @@ void buffSkaitymas(vector<data>& s, string fname) {
 	cout << "Failo skaitymas uztruko: " << durationDouble(hrClock::now() - laikasSkaitymas).count() << " s" << endl;
 };
 
+void rp(vector<int> p) {
+	for (auto& a : p) {
+		cout << a << " ";
+	}
+}
+
 void buffRasymas(vector<data>& s, string fname, char vm) {
+	auto laikasNuskriaustukai = hrClock::now();
+
 	std::stringstream buffer;
 	buffer << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Pavarde";
 	if (vm == 'y') buffer << std::left << std::setw(20) << "Galutinis(Vid.)";
@@ -152,7 +226,8 @@ void buffRasymas(vector<data>& s, string fname, char vm) {
 	buffer.clear();
 
 	buffFaila(fname, buffer);
-	s.clear();
+	cout << fname << " surasymas uztruko: " << durationDouble(hrClock::now() - laikasNuskriaustukai).count() << " s" << endl;
+
 };
 
 void buffFaila(string fname, std::stringstream& buffer) {
@@ -165,6 +240,7 @@ void buffFaila(string fname, std::stringstream& buffer) {
 
 void paskirstymas(vector<data>& s, vector<data>& Kieti, vector<data>& Vargsai, char vm) {
 	auto laikasSkirstymas = hrClock::now();
+
 	if (vm == 'y') {
 		for (auto& el : s) {
 			if (el.v >= 5) Kieti.push_back(el);
@@ -172,13 +248,12 @@ void paskirstymas(vector<data>& s, vector<data>& Kieti, vector<data>& Vargsai, c
 		}
 	}
 
-	if (vm == 'n') {
+	else if (vm == 'n') {
 		for (auto& el : s) {
 			if (el.m >= 5) Kieti.push_back(el);
 			else Vargsai.push_back(el);
 		}
 	}
-	s.clear();
 	cout << "Failo skirstymas i grupes uztruko: " << durationDouble(hrClock::now() - laikasSkirstymas).count() << " s" << endl;
 }
 
