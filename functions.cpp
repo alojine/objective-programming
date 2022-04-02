@@ -65,27 +65,7 @@ void output(data& s, char vm) {
 
 //-------------------------------------------------------------------------------------------------------------------
 
-void failoGeneratorius(ofstream& fr, int a) {
-	vector<string> splitted;
-	string eil;
-	std::stringstream buffer; // buferis
-	int b = 3;
 
-	auto st = hrClock::now();
-
-	buffer << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Pavarde";
-	for (int i = 0; i < b; i++) {
-		buffer << std::left << "ND" << std::setw(5) << i + 1;
-	}
-	buffer << std::left << std::setw(5) << "Egz" << endl;
-
-	for (int i = 0; i < a; i++) {
-		buffer << studentoGeneratorius(b, i).str();
-	}
-
-	fr << buffer.rdbuf();
-	
-};
 
 void generuotifailus(string& failopavadinimas, int kiek, int nd) {
 
@@ -153,48 +133,9 @@ void skaitymas(vector<data>& s, string fname) {
 	cout << "Failo nuskaitymas uztruko: " << durationDouble(hrClock::now() - laikasSkaitymas).count() << " s" << endl;
 }
 
-std::stringstream studentoGeneratorius(int b, int nr) {
-	std::stringstream studentas;
-	studentas << "Vardas" << std::left << std::setw(14) << nr + 1 << "Pavarde" << std::left << std::setw(13) << nr + 1;
-	for (int i = 0; i <= b; i++) {
-		studentas << std::left << std::setw(7) << genrand() << "";
-	}
-	studentas << endl;
-	return studentas;
-};
 
-void buffSkaitymas(vector<data>& s, string fname) {
-	auto laikasSkaitymas = hrClock::now();
-	std::stringstream buffer;
-	string l;
-	ifstream open_f;
-	open_f.open(fname);
 
-	typedef std::chrono::high_resolution_clock Clock;
-	auto start = Clock::now();
 
-	buffer << open_f.rdbuf();
-	open_f.close();
-	std::getline(buffer, l);
-
-	int t = 0;
-	while (buffer) {
-		std::getline(buffer, l);
-		if (l.length() == 0) break;
-		data temp;
-		std::istringstream lStream(l);
-		lStream >> temp.vardas >> temp.pavarde;
-		int paz;
-		while (lStream >> paz) {
-			temp.p.push_back(paz);
-		}
-		temp.egz = temp.p.back();
-		temp.p.pop_back();
-		s.push_back(temp);
-	}
-
-	cout << "Failo skaitymas uztruko: " << durationDouble(hrClock::now() - laikasSkaitymas).count() << " s" << endl;
-};
 
 void rp(vector<int> p) {
 	for (auto& a : p) {
@@ -234,7 +175,7 @@ void buffFaila(string fname, std::stringstream& buffer) {
 	ofstream fp(fname);
 	fp << buffer.rdbuf();
 	fp.close();
-}
+};
 
 
 
@@ -352,7 +293,7 @@ double mediana(vector<int> p, int egz) {
 	return s;
 };
 
-void tabletop(char vm) {
+void antraste(char vm) {
 	if (vm == 'n') cout << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Pavarde" << std::left << std::setw(20) << "Galutinis (Med.)" << endl;
 	else if (vm == 'y') cout << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Pavarde" << std::left << std::setw(20) << "Galutinis (Vid.)" << endl;
 };

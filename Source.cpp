@@ -88,7 +88,7 @@ int main() {
 			s.push_back(temp);
 		}
 		skaiciavimai(s, vm);
-		tabletop(vm);
+		antraste(vm);
 		for (int i = 0; i < s.size(); i++) {
 			output(s.at(i), vm);
 		}
