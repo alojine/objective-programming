@@ -493,5 +493,16 @@ void antraste(char vm) {
 	else if (vm == 'y') cout << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Pavarde" << std::left << std::setw(20) << "Galutinis (Vid.)" << endl;
 };
 
+/*
+struct samplestruct_lessThan
+{
+	bool operator()(samplestruct const& a, samplestruct const& b) const
+	{
+		return a.Name < b.Name;
+	}
+};
+*/
+
+
 
 

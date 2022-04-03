@@ -119,7 +119,9 @@ int main() {
 						generuotifailus(fname, skiekis, 5);
 						skaitymas(s, fname);
 						skaiciavimai(s, vm);
-						std::sort(s.begin(), s.end(), [](data& x, data& y) {return x.vardas < y.vardas; });
+						//std::sort(s.begin(), s.end(), [](data& x, data& y) {return x.vardas < y.vardas; });
+						//s.vardas.sort();
+						//std::sort(s.begin(), s.end(), samplestruct_lessThan());
 
 						paskirstymas(s, Kieti, Vargsai, vm);
 						buffRasymas(Kieti, k, vm);
