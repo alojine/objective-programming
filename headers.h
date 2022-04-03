@@ -39,6 +39,8 @@ struct data {
 	double v = 0, m = 0;
 };
 
+bool rikiuoti(data a, data b);
+
 double vidurkis(vector<int> p, int egz);
 double mediana(vector<int> p, int egz);
 
