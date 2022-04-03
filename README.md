@@ -83,4 +83,25 @@ kietiakai.txt surasymas uztruko: 0.937183 s <br>
 nuskriaustukai.txt surasymas uztruko: 4.50081 s <br>
 Visa programa uztruko 58.4967 s <br>
 
+# v0.5
+Programa atnaujinta galima rinktis konteinerio tipą į kurį vartotojas nori išsaugoti studentą
+Palaidus programą:
+1. Ar norite skityti duomenis is failo? (y/n) y
+2. Ar norite ivesti faila? (y/n) y
+3. Koki konteinerio tipa norite naudoti? vector - 'v', deque - 'd', list - 'l':
+studentas išsaugomas į konteinerį tą kurio pirmąją raidę iveda.
+
+Konteinerių spartos lyginimas:
+<br>
+|                     |       1000      |      10000     |     100000    |   1000000   |
+| ------------------- | --------------- | -------------- | ------------- | ----------- |
+|VECTOR NUSKAITYMAS   |   0.0062851 s   |   0.0949548 s  |  0.675066 s   |  13.4123 s  |
+|VECTOR RŪŠIAVIMAS    |   0.0001799 s   |   0.0021033 s  |  0.0210955 s  |  0.267259 s |
+|DEQUE NUSKAITYMAS    |   0.0055681 s   |   0.0612086 s  |  0.913985 s   |  12.7429 s  |
+|DEQUE RŪŠIAVIMAS     |   0.0001259 s   |   0.0011858 s  |  0.0220048 s  |  0.224872 s |
+|LIST NUSKAITYMAS     |   0.0066457 s   |   0.0608856 s  |  0.760501 s   |  14.6578 s  |
+|LIST RŪŠIAVIMAS      |   0.0001457 s   |   0.0014011 s  |  0.0190997 s  |  0.34972 s  |
+
+
+
 
