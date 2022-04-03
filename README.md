@@ -48,35 +48,39 @@ Programos laikas nustatomas šiems kriterijams:
 
 VECTOR
 1000
-1. Failo sudarymas uztruko: 0.0263304 s
-2. Failo nuskaitymas uztruko: 0.0062851 s
-3. Failo skirstymas i grupes uztruko: 0.0001799 s
-4.1 kietiakai.txt surasymas uztruko: 0.0010151 s
-4.2 nuskriaustukai.txt surasymas uztruko: 0.0052932 s
-5. Visa programa uztruko 0.0450208 s
+<br>
+Failo sudarymas uztruko: 0.0263304 s <br>
+Failo nuskaitymas uztruko: 0.0062851 s <br>
+Failo skirstymas i grupes uztruko: 0.0001799 s <br>
+kietiakai.txt surasymas uztruko: 0.0010151 s <br>
+nuskriaustukai.txt surasymas uztruko: 0.0052932 s <br>
+Visa programa uztruko 0.0450208 s <br>
 
 10000
-Failo sudarymas uztruko: 0.395983 s
-Failo nuskaitymas uztruko: 0.0949548 s
-Failo skirstymas i grupes uztruko: 0.0021033 s
+<br>
+Failo sudarymas uztruko: 0.395983 s <br>
+Failo nuskaitymas uztruko: 0.0949548 s <br>
+Failo skirstymas i grupes uztruko: 0.0021033 s <br>
 kietiakai.txt surasymas uztruko: 0.0077206 s
-nuskriaustukai.txt surasymas uztruko: 0.0415379 s
-Visa programa uztruko 0.571244 s
+nuskriaustukai.txt surasymas uztruko: 0.0415379 s <br>
+Visa programa uztruko 0.571244 s <br>
 
 100000
-Failo sudarymas uztruko: 2.92119 s
-Failo nuskaitymas uztruko: 0.675066 s
-Failo skirstymas i grupes uztruko: 0.0210955 s
-kietiakai.txt surasymas uztruko: 0.0866178 s
-nuskriaustukai.txt surasymas uztruko: 0.389649 s
-Visa programa uztruko 4.16463 s
+<br>
+Failo sudarymas uztruko: 2.92119 s <br>
+Failo nuskaitymas uztruko: 0.675066 s <br>
+Failo skirstymas i grupes uztruko: 0.0210955 s <br>
+kietiakai.txt surasymas uztruko: 0.0866178 s <br>
+nuskriaustukai.txt surasymas uztruko: 0.389649 s <br>
+Visa programa uztruko 4.16463 s <br>
 
 1000000
-Failo sudarymas uztruko: 38.2789 s
-Failo nuskaitymas uztruko: 13.4123 s
-Failo skirstymas i grupes uztruko: 0.267259 s
-kietiakai.txt surasymas uztruko: 0.937183 s
-nuskriaustukai.txt surasymas uztruko: 4.50081 s
-Visa programa uztruko 58.4967 s
+<br>
+Failo sudarymas uztruko: 38.2789 s <br>
+Failo nuskaitymas uztruko: 13.4123 s <br>
+Failo skirstymas i grupes uztruko: 0.267259 s <br>
+kietiakai.txt surasymas uztruko: 0.937183 s <br>
+nuskriaustukai.txt surasymas uztruko: 4.50081 s <br>
+Visa programa uztruko 58.4967 s <br>
 
 
