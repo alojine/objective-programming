@@ -46,37 +46,37 @@ Programos laikas nustatomas šiems kriterijams:
 4. Surušiuotų studentų išvedimą į du failus.
 5. Visos programos laikas.
 
-1000 failas:
-1. 0.0726 s
-2. 0.0690 s
-3. 0.0101 s
-4. 0.0022 s || 0.0096 s
-5. 0.1923 s
+VECTOR
+1000
+1. Failo sudarymas uztruko: 0.0263304 s
+2. Failo nuskaitymas uztruko: 0.0062851 s
+3. Failo skirstymas i grupes uztruko: 0.0001799 s
+4.1 kietiakai.txt surasymas uztruko: 0.0010151 s
+4.2 nuskriaustukai.txt surasymas uztruko: 0.0052932 s
+5. Visa programa uztruko 0.0450208 s
 
-10000 failas:
-1.  0.7242 s
-2.  0.6130 s
-3.  0.0906 s
-4.  0.0193 s || 0.0753 s
-5.  1.8647 s
+10000
+Failo sudarymas uztruko: 0.395983 s
+Failo nuskaitymas uztruko: 0.0949548 s
+Failo skirstymas i grupes uztruko: 0.0021033 s
+kietiakai.txt surasymas uztruko: 0.0077206 s
+nuskriaustukai.txt surasymas uztruko: 0.0415379 s
+Visa programa uztruko 0.571244 s
 
-100000 failas:
-1.  7.8920 s
-2.  6.0832 s
-3.  1.0049 s
-4.  0.1892 s || 0.7502 s
-5.  19.416 s
+100000
+Failo sudarymas uztruko: 2.92119 s
+Failo nuskaitymas uztruko: 0.675066 s
+Failo skirstymas i grupes uztruko: 0.0210955 s
+kietiakai.txt surasymas uztruko: 0.0866178 s
+nuskriaustukai.txt surasymas uztruko: 0.389649 s
+Visa programa uztruko 4.16463 s
 
-1000000 failas:
-1. 74.21 s
-2. 60.95 s
-3. 10.71 s
-4. 1.8352 s || 7.5544 s
-5. 205.31 s
+1000000
+Failo sudarymas uztruko: 38.2789 s
+Failo nuskaitymas uztruko: 13.4123 s
+Failo skirstymas i grupes uztruko: 0.267259 s
+kietiakai.txt surasymas uztruko: 0.937183 s
+nuskriaustukai.txt surasymas uztruko: 4.50081 s
+Visa programa uztruko 58.4967 s
 
-10000000 failas:
-1. 802.87 s
-2. 766.69 s
-3. 96.68 s
-4. 43.26 s || 48.69 s
-5. 1758.19 s
+
