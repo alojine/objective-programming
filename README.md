@@ -104,7 +104,7 @@ Konteinerių spartos lyginimas:
 
 
 Parametrai:
-CPU: Intel Core i5-10300H 2.5 GHz
-SSD: 476GB SAMSUNG MZVLQ512HALU
-RAM: 8GB 2933MHz
+- CPU: Intel Core i5-10300H 2.5 GHz
+- SSD: 476GB SAMSUNG MZVLQ512HALU
+- RAM: 8GB 2933MHz
 
