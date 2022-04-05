@@ -103,5 +103,8 @@ Konteinerių spartos lyginimas:
 |LIST RŪŠIAVIMAS      |   0.0001457 s   |   0.0014011 s  |  0.0190997 s  |  0.34972 s  |
 
 
-
+Parametrai:
+CPU: Intel Core i5-10300H 2.5 GHz
+SSD: 476GB SAMSUNG MZVLQ512HALU
+RAM: 8GB 2933MHz
 
