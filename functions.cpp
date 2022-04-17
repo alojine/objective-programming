@@ -308,59 +308,96 @@ void buffFaila(string fname, std::stringstream& buffer) {
 void paskirstymas(vector<data>& s, vector<data>& Kieti, vector<data>& Vargsai, char vm) {
 	auto laikasSkirstymas = hrClock::now();
 
+	vector<data>::iterator it = s.end();
+	it--;
+
 	if (vm == 'y') {
-		for (auto& el : s) {
-			if (el.v >= 5) Kieti.push_back(el);
-			else Vargsai.push_back(el);
+		for (auto i = s.size() - 1; i > 0; i--) {
+			if (it->v < 5) {
+				Vargsai.push_back(*it);
+			}
+			it--;
 		}
 	}
 
-	else if (vm == 'n') {
-		for (auto& el : s) {
-			if (el.m >= 5) Kieti.push_back(el);
-			else Vargsai.push_back(el);
+	if (vm == 'n') {
+		for (auto i = s.size() - 1; i > 0; i--) {
+			if (it->m < 5) {
+				Vargsai.push_back(*it);
+			}
+			it--;
 		}
 	}
+
+	s.resize(s.size() - Vargsai.size());
+	Kieti = s;
+	s.clear();
+	
+	
 	cout << "Failo skirstymas i grupes uztruko: " << durationDouble(hrClock::now() - laikasSkirstymas).count() << " s" << endl;
 }
 
 void paskirstymas(deque<data>& s, deque<data>& Kieti, deque<data>& Vargsai, char vm) {
 	auto laikasSkirstymas = hrClock::now();
 
+	deque<data>::iterator it = s.end();
+	it--;
+
 	if (vm == 'y') {
-		for (auto& el : s) {
-			if (el.v >= 5) Kieti.push_back(el);
-			else Vargsai.push_back(el);
+		for (auto i = s.size() - 1; i > 0; i--) {
+			if (it->v < 5) {
+				Vargsai.push_back(*it);
+			}
+			it--;
 		}
 	}
 
-	else if (vm == 'n') {
-		for (auto& el : s) {
-			if (el.m >= 5) Kieti.push_back(el);
-			else Vargsai.push_back(el);
+	if (vm == 'n') {
+		for (auto i = s.size() - 1; i > 0; i--) {
+			if (it->m < 5) {
+				Vargsai.push_back(*it);
+			}
+			it--;
 		}
 	}
+
+	s.resize(s.size() - Vargsai.size());
+	Kieti = s;
+	s.clear();
 	cout << "Failo skirstymas i grupes uztruko: " << durationDouble(hrClock::now() - laikasSkirstymas).count() << " s" << endl;
 }
 
 void paskirstymas(list<data>& s, list<data>& Kieti, list<data>& Vargsai, char vm) {
 	auto laikasSkirstymas = hrClock::now();
 
+	list<data>::iterator it = s.end();
+	it--;
+
 	if (vm == 'y') {
-		for (auto& el : s) {
-			if (el.v >= 5) Kieti.push_back(el);
-			else Vargsai.push_back(el);
+		for (auto i = s.size() - 1; i > 0; i--) {
+			if (it->v < 5) {
+				Vargsai.push_back(*it);
+			}
+			it--;
 		}
 	}
 
-	else if (vm == 'n') {
-		for (auto& el : s) {
-			if (el.m >= 5) Kieti.push_back(el);
-			else Vargsai.push_back(el);
+	if (vm == 'n') {
+		for (auto i = s.size() - 1; i > 0; i--) {
+			if (it->m < 5) {
+				Vargsai.push_back(*it);
+			}
+			it--;
 		}
 	}
+
+	s.resize(s.size() - Vargsai.size());
+	Kieti = s;
+	s.clear();
 	cout << "Failo skirstymas i grupes uztruko: " << durationDouble(hrClock::now() - laikasSkirstymas).count() << " s" << endl;
 }
+
+//----------------------------------------------------------------------------------
 
 void failoSkaitymas(ifstream& fr, vector<data>& s, vector<string>& l) {
 
