@@ -116,22 +116,21 @@ Reikia parsisiųsti *mingw32* arba *chocolatey*, arba bet kokią komandų eilut�
 
 ## Programos realizacija: ##
 
- Ar norite skityti duomenis is failo? (y/n) **n**
-    Jei norite kad programa isvestu vidurki iveskite 'y', jeigu mediana, iveskite 'n': **y** arba **n** 
-    Iveskite studentu skaiciu: **(betkoks sveikas skaicius)**
-    Iveskite studento varda: **(betkoks string tipo kintamasis)**
-    Iveskite studento pavarde: **(betkoks string tipo kintamasis)**
-    Iveskite pazymiu kieki: **(sveikas skaicius)**
-      *sugeneruojamas pazymiu kiekis*
-    Jei noretumete ivesti dar pazymiu iveskite 'y', jei ne 'n': **n**
-      *Isvedama studento vardas, pavarde ir galutinis rezultaras*
+ - Ar norite skityti duomenis is failo? (y/n) **n**
+    - Jei norite kad programa isvestu vidurki iveskite 'y', jeigu mediana, iveskite 'n': **y** arba **n** 
+    - Iveskite studentu skaiciu: **(betkoks sveikas skaicius)**
+    - Iveskite studento varda: **(betkoks string tipo kintamasis)**
+    - Iveskite studento pavarde: **(betkoks string tipo kintamasis)**
+    - Iveskite pazymiu kieki: **(sveikas skaicius)**
+    - Jei noretumete ivesti dar pazymiu iveskite 'y', jei ne 'n': **n**
+      - Isvedama studento vardas, pavarde ir galutinis rezultaras
       
-Ar norite skityti duomenis is failo? (y/n) **y**
-    Ar norite ivesti faila? (y/n) **n** - skaito is *studentai.txt* failo, **y** 
-    Koki konteinerio tipa norite naudoti? vector - 'v', deque - 'd', list - 'l': *(konteinerio tipas)*
-    Kokia skirstymo strategija norite naudoti? 1 - 'y', 2 - 'n': *(skirstymo strategija)*
-    Iveskite studentu kieki: **(sveikas skaicius)**
-    (Vidurkis/Mediana) - (y/n) 
+- Ar norite skityti duomenis is failo? (y/n) **y**
+    - Ar norite ivesti faila? (y/n) **n** - skaito is *studentai.txt* failo, **y** 
+    - Koki konteinerio tipa norite naudoti? vector - 'v', deque - 'd', list - 'l': *(konteinerio tipas)*
+    - Kokia skirstymo strategija norite naudoti? 1 - 'y', 2 - 'n': *(skirstymo strategija)*
+    - Iveskite studentu kieki: **(sveikas skaicius)**
+    - (Vidurkis/Mediana) - (y/n) 
     
 Sukuriamas failas (studentai + studentu kiekis) į jį sugeneruojami vardai, pavardės, pažymiai, vėliau yra nuskaitomas failas, suskaiciuojamas galutinis vidurkis arba mediana, suskirtomas pasirinktas konteineris pagal skirstymo būdą, surikiuojami pagal vardą ir išvedami į 2 skirtingus failus *kietiakai.txt* studentai kurių vidurkis penki ir daugiau, ir *nuskriaustukai.txt* kurių vidurkis mažesnis nei penki.
 
