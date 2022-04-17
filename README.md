@@ -109,6 +109,10 @@ Parametrai:
 - RAM: 8GB 2933MHz
 
 # v1.0
+
+## Kaip paleisti programą: ##
+Reikia parsisiūsti mingw32 arba chocolatey arba bet kokią mašinos lygio komandų eilutės paketų tvarkyklė leidžiančią naudoti *Makefile*. Kai jau turite parsisiūskite *v0.1 release* failus ir išsaugokite juos faile.
+Tą padarius nueikite į *command prompt* arba *power shell*, nueikite į direktoriją kurioje išsaugoti failai, parašykite **make**, kai sukompiliuos executable failą, iveskite **./run** ir programa bus paleista.
 ## Testavimai ##
 
 ### Naudojant pirmąją strategiją ###
