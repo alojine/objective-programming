@@ -173,32 +173,33 @@ int main() {
 
 		}
 
-		else if (howInput == 'n') { // Generavimas / rasymas
-			vector<data> s;
-			cout << "Jei norite kad programa isvestu vidurki iveskite 'y', jeigu mediana, iveskite 'n': ";
-			char vm = charApsauga(vm);
+		
+	}
 
-			cout << "Iveskite studentu skaiciu: ";
-			int studentai = sveikojoApsauga(studentai);
+	else if (howInput == 'n') { // Generavimas / rasymas
+		vector<data> s;
+		cout << "Jei norite kad programa isvestu vidurki iveskite 'y', jeigu mediana, iveskite 'n': ";
+		char vm = charApsauga(vm);
 
-			s.reserve(studentai);
-			for (int i = 0; i < studentai; i++) {
-				data temp;
-				input(temp);
-				s.push_back(temp);
-			}
-			skaiciavimai(s, vm);
-			antraste(vm);
-			for (int i = 0; i < s.size(); i++) {
-				output(s.at(i), vm);
-			}
+		cout << "Iveskite studentu skaiciu: ";
+		int studentai = sveikojoApsauga(studentai);
 
-			s.clear();
+		s.reserve(studentai);
+		for (int i = 0; i < studentai; i++) {
+			data temp;
+			input(temp);
+			s.push_back(temp);
+		}
+		skaiciavimai(s, vm);
+		antraste(vm);
+		for (int i = 0; i < s.size(); i++) {
+			output(s.at(i), vm);
 		}
 
+		s.clear();
+	}
 
 		system("pause");
-	}
 }
 
 
