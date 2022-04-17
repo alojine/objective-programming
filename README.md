@@ -162,6 +162,10 @@ Sukuriamas failas (studentai + studentu kiekis) į jį sugeneruojami vardai, pav
 |DEQUE                |   0.0978551 s   |   0.087919 s   |  0.55718 s    |  5.9456 s   |   59.228 s  |
 |LIST                 |   0.0637336 s   |   0.0711814 s  |  0.5301 s     |  5.6935 s   |   52.579 s  |
 
+### Testavimo išvados ###
+- Greičiausias iš visų testuotų struktūros tipas yra **std::list**
+- Greitesnė programos rūšiavimo strategija yra **1-oji** kai užpildomos dvi naujos pasirinkto tipo struktūos, tačiau taip užimama daugiau vietos, nes neišaikoma esama struktūra.
+
 Parametrai:
 - CPU: Intel Core i5-10300H 2.5 GHz
 - SSD: 476GB SAMSUNG MZVLQ512HALU
