@@ -111,8 +111,15 @@ Parametrai:
 # v1.0
 
 ## Kaip paleisti programą: ##
-Reikia parsisiūsti mingw32 arba chocolatey arba bet kokią mašinos lygio komandų eilutės paketų tvarkyklė leidžiančią naudoti *Makefile*. Kai jau turite parsisiūskite *v0.1 release* failus ir išsaugokite juos faile.
-Tą padarius nueikite į *command prompt* arba *power shell*, nueikite į direktoriją kurioje išsaugoti failai, parašykite **make**, kai sukompiliuos executable failą, iveskite **./run** ir programa bus paleista.
+
+Reikia parsisiųsti *mingw32* arba *chocolatey*, arba bet kokią komandų eilutės paketų tvarkyklę leidžiančią naudoti *Makefile*. Parsisiūskite *v1.0 release* failus ir išsaugokite juos faile. Tą padarius nueikite į *Command Prompt* arba *PowerShell*, nueikite į vietą kurioje išsaugoti failai, parašykite **make**, kai sukompiliuos executable failą, iveskite **./run** ir programa bus paleista.
+
+## Programos realizacija: ##
+
+- Ar norite skityti duomenis is failo? (y/n) **n**
+  -
+
+
 ## Testavimai ##
 
 ### Naudojant pirmąją strategiją ###
