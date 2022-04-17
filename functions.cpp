@@ -304,96 +304,156 @@ void buffFaila(string fname, std::stringstream& buffer) {
 };
 
 
+void paskirstymas(vector<data>& s, vector<data>& Kieti, vector<data>& Vargsai, char vm, char stratType) {
 
-void paskirstymas(vector<data>& s, vector<data>& Kieti, vector<data>& Vargsai, char vm) {
 	auto laikasSkirstymas = hrClock::now();
 
-	vector<data>::iterator it = s.end();
-	it--;
+	if (stratType == 'n') {
+		vector<data>::iterator it = s.end();
+		it--;
 
-	if (vm == 'y') {
-		for (auto i = s.size() - 1; i > 0; i--) {
-			if (it->v < 5) {
-				Vargsai.push_back(*it);
+		if (vm == 'y') {
+			for (auto i = s.size() - 1; i > 0; i--) {
+				if (it->v < 5) {
+					Vargsai.push_back(*it);
+					s.resize(s.size() - 1);
+				}
+				it--;
 			}
-			it--;
 		}
-	}
 
-	if (vm == 'n') {
-		for (auto i = s.size() - 1; i > 0; i--) {
-			if (it->m < 5) {
-				Vargsai.push_back(*it);
+		if (vm == 'n') {
+			for (auto i = s.size() - 1; i > 0; i--) {
+				if (it->m < 5) {
+					Vargsai.push_back(*it);
+					s.resize(s.size() - 1);
+				}
+				it--;
 			}
-			it--;
 		}
+		Kieti = s;
+		s.clear();
 	}
-
-	s.resize(s.size() - Vargsai.size());
-	Kieti = s;
-	s.clear();
 	
+	else if (stratType == 'y') {
+		if (vm == 'y') {
+			for (auto& el : s) {
+				if (el.v >= 5) Kieti.push_back(el);
+				else Vargsai.push_back(el);
+			}
+		}
+
+		else if (vm == 'n') {
+			for (auto& el : s) {
+				if (el.m >= 5) Kieti.push_back(el);
+				else Vargsai.push_back(el);
+			}
+		}
+
+	}
 	
 	cout << "Failo skirstymas i grupes uztruko: " << durationDouble(hrClock::now() - laikasSkirstymas).count() << " s" << endl;
 }
 
-void paskirstymas(deque<data>& s, deque<data>& Kieti, deque<data>& Vargsai, char vm) {
+void paskirstymas(deque<data>& s, deque<data>& Kieti, deque<data>& Vargsai, char vm, char stratType) {
+
 	auto laikasSkirstymas = hrClock::now();
 
-	deque<data>::iterator it = s.end();
-	it--;
+	if (stratType == 'n') {
+		deque<data>::iterator it = s.end();
+		it--;
 
-	if (vm == 'y') {
-		for (auto i = s.size() - 1; i > 0; i--) {
-			if (it->v < 5) {
-				Vargsai.push_back(*it);
+		if (vm == 'y') {
+			for (auto i = s.size() - 1; i > 0; i--) {
+				if (it->v < 5) {
+					Vargsai.push_back(*it);
+					s.resize(s.size() - 1);
+				}
+				it--;
 			}
-			it--;
 		}
+
+		if (vm == 'n') {
+			for (auto i = s.size() - 1; i > 0; i--) {
+				if (it->m < 5) {
+					Vargsai.push_back(*it);
+					s.resize(s.size() - 1);
+				}
+				it--;
+			}
+		}
+		Kieti = s;
+		s.clear();
 	}
 
-	if (vm == 'n') {
-		for (auto i = s.size() - 1; i > 0; i--) {
-			if (it->m < 5) {
-				Vargsai.push_back(*it);
+	else if (stratType == 'y') {
+		if (vm == 'y') {
+			for (auto& el : s) {
+				if (el.v >= 5) Kieti.push_back(el);
+				else Vargsai.push_back(el);
 			}
-			it--;
 		}
+
+		else if (vm == 'n') {
+			for (auto& el : s) {
+				if (el.m >= 5) Kieti.push_back(el);
+				else Vargsai.push_back(el);
+			}
+		}
+
 	}
 
-	s.resize(s.size() - Vargsai.size());
-	Kieti = s;
-	s.clear();
 	cout << "Failo skirstymas i grupes uztruko: " << durationDouble(hrClock::now() - laikasSkirstymas).count() << " s" << endl;
 }
 
-void paskirstymas(list<data>& s, list<data>& Kieti, list<data>& Vargsai, char vm) {
+void paskirstymas(list<data>& s, list<data>& Kieti, list<data>& Vargsai, char vm, char stratType) {
+
 	auto laikasSkirstymas = hrClock::now();
 
-	list<data>::iterator it = s.end();
-	it--;
+	if (stratType == 'n') {
+		list<data>::iterator it = s.end();
+		it--;
 
-	if (vm == 'y') {
-		for (auto i = s.size() - 1; i > 0; i--) {
-			if (it->v < 5) {
-				Vargsai.push_back(*it);
+		if (vm == 'y') {
+			for (auto i = s.size() - 1; i > 0; i--) {
+				if (it->v < 5) {
+					Vargsai.push_back(*it);
+					s.resize(s.size() - 1);
+				}
+				it--;
 			}
-			it--;
 		}
+
+		if (vm == 'n') {
+			for (auto i = s.size() - 1; i > 0; i--) {
+				if (it->m < 5) {
+					Vargsai.push_back(*it);
+					s.resize(s.size() - 1);
+				}
+				it--;
+			}
+		}
+		Kieti = s;
+		s.clear();
 	}
 
-	if (vm == 'n') {
-		for (auto i = s.size() - 1; i > 0; i--) {
-			if (it->m < 5) {
-				Vargsai.push_back(*it);
+	else if (stratType == 'y') {
+		if (vm == 'y') {
+			for (auto& el : s) {
+				if (el.v >= 5) Kieti.push_back(el);
+				else Vargsai.push_back(el);
 			}
-			it--;
 		}
+
+		else if (vm == 'n') {
+			for (auto& el : s) {
+				if (el.m >= 5) Kieti.push_back(el);
+				else Vargsai.push_back(el);
+			}
+		}
+
 	}
 
-	s.resize(s.size() - Vargsai.size());
-	Kieti = s;
-	s.clear();
 	cout << "Failo skirstymas i grupes uztruko: " << durationDouble(hrClock::now() - laikasSkirstymas).count() << " s" << endl;
 }
 
@@ -466,7 +526,7 @@ void skaiciavimai(vector<data>& s, char vm) {
 	for (auto& el : s) {
 		if (vm == 'y') el.v = vidurkis(el.p, el.egz);
 		else if (vm == 'n') el.m = mediana(el.p, el.egz);
-		else if (vm == 'abu') {
+		else if (vm == 'a') {
 			el.m = mediana(el.p, el.egz);
 			el.v = vidurkis(el.p, el.egz);
 		}
@@ -477,7 +537,7 @@ void skaiciavimai(deque<data>& s, char vm) {
 	for (auto& el : s) {
 		if (vm == 'y') el.v = vidurkis(el.p, el.egz);
 		else if (vm == 'n') el.m = mediana(el.p, el.egz);
-		else if (vm == 'abu') {
+		else if (vm == 'a') {
 			el.m = mediana(el.p, el.egz);
 			el.v = vidurkis(el.p, el.egz);
 		}
@@ -488,7 +548,7 @@ void skaiciavimai(list<data>& s, char vm) {
 	for (auto& el : s) {
 		if (vm == 'y') el.v = vidurkis(el.p, el.egz);
 		else if (vm == 'n') el.m = mediana(el.p, el.egz);
-		else if (vm == 'abu') {
+		else if (vm == 'a') {
 			el.m = mediana(el.p, el.egz);
 			el.v = vidurkis(el.p, el.egz);
 		}
@@ -530,9 +590,12 @@ void antraste(char vm) {
 	else if (vm == 'y') cout << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Pavarde" << std::left << std::setw(20) << "Galutinis (Vid.)" << endl;
 };
 
-bool rikiuoti(data a, data b)
-{
+bool rikiuoti(data a, data b){
 	return a.vardas < b.vardas;
+}
+
+bool rikiuotiPazymi(data a, data b) {
+	return a.egz > b.egz;
 }
 
 

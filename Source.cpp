@@ -15,6 +15,9 @@ int main() {
 			cout << "Koki konteinerio tipa norite naudoti? vector - 'v', deque - 'd', list - 'l': ";
 			char conType = konteinerioApsauga(conType);
 
+			cout << "Kokia skirtymo strategija norite naudoti? 1 - 'y', 2 - 'n': ";
+			char st = charApsauga(st);
+			
 			if (conType == 'v') {
 				vector<data> s;
 				do {
@@ -26,6 +29,7 @@ int main() {
 
 						cout << "(Vidurkis/Mediana) - (y/n) ";
 						char vm = charApsauga(vm);
+						
 						cout << endl;
 						s.reserve(skiekis);
 						auto laikasVisa = hrClock::now();
@@ -33,10 +37,11 @@ int main() {
 
 						generuotifailus(fname, skiekis, 5);
 						skaitymas(s, fname);
+						sort(s.begin(), s.end(), rikiuotiPazymi);
 						skaiciavimai(s, vm);
-						std::sort(s.begin(), s.end(), [](data& x, data& y) {return x.vardas < y.vardas; });
-
-						paskirstymas(s, Kieti, Vargsai, vm);
+						paskirstymas(s, Kieti, Vargsai, vm, st);
+						std::sort(Kieti.begin(), Kieti.end(), [](data& x, data& y) {return x.vardas < y.vardas; });
+						std::sort(Vargsai.begin(), Vargsai.end(), [](data& x, data& y) {return x.vardas < y.vardas; });
 						buffRasymas(Kieti, k, vm);
 						buffRasymas(Vargsai, n, vm);
 						s.clear(); Kieti.clear(); Vargsai.clear();
@@ -75,10 +80,11 @@ int main() {
 
 						generuotifailus(fname, skiekis, 5);
 						skaitymas(s, fname);
+						sort(s.begin(), s.end(), rikiuotiPazymi);
 						skaiciavimai(s, vm);
-						std::sort(s.begin(), s.end(), [](data& x, data& y) {return x.vardas < y.vardas; });
-
-						paskirstymas(s, Kieti, Vargsai, vm);
+						paskirstymas(s, Kieti, Vargsai, vm, st);
+						std::sort(Kieti.begin(), Kieti.end(), [](data& x, data& y) {return x.vardas < y.vardas; });
+						std::sort(Vargsai.begin(), Vargsai.end(), [](data& x, data& y) {return x.vardas < y.vardas; });
 						buffRasymas(Kieti, k, vm);
 						buffRasymas(Vargsai, n, vm);
 						s.clear(); Kieti.clear(); Vargsai.clear();
@@ -118,11 +124,11 @@ int main() {
 
 						generuotifailus(fname, skiekis, 5);
 						skaitymas(s, fname);
+						s.sort(rikiuotiPazymi);
 						skaiciavimai(s, vm);
-						s.sort(rikiuoti);
-						
-
-						paskirstymas(s, Kieti, Vargsai, vm);
+						paskirstymas(s, Kieti, Vargsai, vm, st);
+						Vargsai.sort(rikiuoti);
+						Kieti.sort(rikiuoti);
 						buffRasymas(Kieti, k, vm);
 						buffRasymas(Vargsai, n, vm);
 						s.clear(); Kieti.clear(); Vargsai.clear();
@@ -147,11 +153,13 @@ int main() {
 			else if (gen == 'n') { // Skaito viena faila
 				vector<data> s;
 				try {
+                    //cout << "(Vidurkis/Mediana) - (y/n) ";
+					//char vm = charApsauga(vm);
 					//std::ifstream fr("studentai.txt");
 					std::ofstream fp("kursiokai.txt");
 					vector<string> head; // virsutines eilutes nuskaitymas
 					skaitymas(s, "studentai.txt");
-					skaiciavimai(s, 'abu');
+					skaiciavimai(s, 'a');
 					failoAntraste(fp);
 					std::sort(s.begin(), s.end(), [](data& x, data& y) {return x.vardas < y.vardas; }); // rikiavimas pagal varda
 					for (auto& el : s) {

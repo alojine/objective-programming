@@ -40,6 +40,8 @@ struct data {
 };
 
 bool rikiuoti(data a, data b);
+bool rikiuotiPazymi(data a, data b);
+bool mazasPazimys(int a);
 
 double vidurkis(vector<int> p, int egz);
 double mediana(vector<int> p, int egz);
@@ -70,6 +72,6 @@ void buffRasymas(vector<data>& s, string fname, char vm);
 void buffRasymas(deque<data>& s, string fname, char vm);
 void buffRasymas(list<data>& s, string fname, char vm);
 void buffFaila(string fname, std::stringstream& buffer);
-void paskirstymas(vector<data>& s, vector<data>& Kieti, vector<data>& Vargsai, char vm);
-void paskirstymas(deque<data>& s, deque<data>& Kieti, deque<data>& Vargsai, char vm);
-void paskirstymas(list<data>& s, list<data>& Kieti, list<data>& Vargsai, char vm);
+void paskirstymas(vector<data>& s, vector<data>& Kieti, vector<data>& Vargsai, char vm, char stratType);
+void paskirstymas(deque<data>& s, deque<data>& Kieti, deque<data>& Vargsai, char vm, char stratType);
+void paskirstymas(list<data>& s, list<data>& Kieti, list<data>& Vargsai, char vm, char stratType);
