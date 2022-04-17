@@ -136,3 +136,8 @@ Parametrai:
 |VECTOR               |   0.0797068 s   |   0.083429 s   |  0.54483 s    |  5.3933 s   |   54.824 s  |
 |DEQUE                |   0.0978551 s   |   0.087919 s   |  0.55718 s    |  5.9456 s   |   59.228 s  |
 |LIST                 |   0.0637336 s   |   0.0711814 s  |  0.5301 s     |  5.6935 s   |   52.579 s  |
+
+Parametrai:
+- CPU: Intel Core i5-10300H 2.5 GHz
+- SSD: 476GB SAMSUNG MZVLQ512HALU
+- RAM: 8GB 2933MHz
