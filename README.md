@@ -164,7 +164,7 @@ Sukuriamas failas (studentai + studentu kiekis) į jį sugeneruojami vardai, pav
 
 ### Testavimo išvados ###
 - Greičiausias iš visų testuotų struktūros tipas yra **std::list**
-- Greitesnė programos rūšiavimo strategija yra **1-oji** kai užpildomos dvi naujos pasirinkto tipo struktūos, tačiau taip užimama daugiau vietos, nes neišaikoma esama struktūra.
+- Antroji strategija greitesnė už pirmąją
 
 Parametrai:
 - CPU: Intel Core i5-10300H 2.5 GHz
