@@ -39,6 +39,7 @@ struct data {
 	double v = 0, m = 0;
 };
 
+bool egzistuojaFailas(string fname);
 bool rikiuoti(data a, data b);
 bool rikiuotiPazymi(data a, data b);
 bool mazasPazimys(int a);

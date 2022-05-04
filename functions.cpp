@@ -96,6 +96,11 @@ void generuotifailus(string& failopavadinimas, int kiek, int nd) {
 	rf.close();
 }
 
+bool egzistuojaFailas(string fname) {
+	ifstream f(fname.c_str());
+	return f.good();
+}
+
 void skaitymas(vector<data>& s, string fname) {
 	auto laikasSkaitymas = hrClock::now();
 	ifstream fd(fname);
@@ -418,7 +423,6 @@ void paskirstymas(list<data>& s, list<data>& Kieti, list<data>& Vargsai, char vm
 			for (auto i = s.size() - 1; i > 0; i--) {
 				if (it->v < 5) {
 					Vargsai.push_back(*it);
-					s.resize(s.size() - 1);
 				}
 				it--;
 			}
@@ -428,11 +432,11 @@ void paskirstymas(list<data>& s, list<data>& Kieti, list<data>& Vargsai, char vm
 			for (auto i = s.size() - 1; i > 0; i--) {
 				if (it->m < 5) {
 					Vargsai.push_back(*it);
-					s.resize(s.size() - 1);
 				}
 				it--;
 			}
 		}
+		s.resize(s.size() - Vargsai.size());
 		Kieti = s;
 		s.clear();
 	}

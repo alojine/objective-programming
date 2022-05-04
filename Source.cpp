@@ -17,6 +17,9 @@ int main() {
 
 			cout << "Kokia skirtymo strategija norite naudoti? 1 - 'y', 2 - 'n': ";
 			char st = charApsauga(st);
+
+			cout << "(Vidurkis/Mediana) - (y/n) ";
+			char vm = charApsauga(vm);
 			
 			if (conType == 'v') {
 				vector<data> s;
@@ -26,16 +29,13 @@ int main() {
 						cout << "Iveskite studentu kieki: ";
 						int skiekis = sveikojoApsauga(skiekis);
 						fname += std::to_string(skiekis) + ".txt";
-
-						cout << "(Vidurkis/Mediana) - (y/n) ";
-						char vm = charApsauga(vm);
 						
 						cout << endl;
 						s.reserve(skiekis);
 						auto laikasVisa = hrClock::now();
 						string n = "nuskriaustukai.txt", k = "kietiakai.txt"; vector<data> Kieti; vector<data> Vargsai;
 
-						generuotifailus(fname, skiekis, 5);
+						if (!(egzistuojaFailas(fname))) generuotifailus(fname, skiekis, 5);
 						skaitymas(s, fname);
 						sort(s.begin(), s.end(), rikiuotiPazymi);
 						skaiciavimai(s, vm);
@@ -71,14 +71,10 @@ int main() {
 						int skiekis = sveikojoApsauga(skiekis);
 						fname += std::to_string(skiekis) + ".txt";
 
-						cout << "(Vidurkis/Mediana) - (y/n) ";
-						char vm = charApsauga(vm);
-						cout << endl;
-
 						auto laikasVisa = hrClock::now();
 						string n = "nuskriaustukai.txt", k = "kietiakai.txt"; deque<data> Kieti; deque<data> Vargsai;
 
-						generuotifailus(fname, skiekis, 5);
+						if (!(egzistuojaFailas(fname))) generuotifailus(fname, skiekis, 5);
 						skaitymas(s, fname);
 						sort(s.begin(), s.end(), rikiuotiPazymi);
 						skaiciavimai(s, vm);
@@ -115,14 +111,11 @@ int main() {
 						int skiekis = sveikojoApsauga(skiekis);
 						fname += std::to_string(skiekis) + ".txt";
 
-						cout << "(Vidurkis/Mediana) - (y/n) ";
-						char vm = charApsauga(vm);
-						cout << endl;
-
 						auto laikasVisa = hrClock::now();
 						string n = "nuskriaustukai.txt", k = "kietiakai.txt"; list<data> Kieti; list<data> Vargsai;
 
-						generuotifailus(fname, skiekis, 5);
+
+						if (!(egzistuojaFailas(fname))) generuotifailus(fname, skiekis, 5);
 						skaitymas(s, fname);
 						s.sort(rikiuotiPazymi);
 						skaiciavimai(s, vm);
